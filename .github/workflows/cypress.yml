@@ -1,0 +1,17 @@
+name: Cypress
+
+on: [push, workflow_dispatch]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+        env:
+          CYPRESS_apiUsername: ${{ secrets.API_USERNAME }}
+          CYPRESS_apiPassword: ${{ secrets.API_PASSWORD }}

@@ -1,0 +1,9 @@
+{
+  "products": ["Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Fleece Jacket"],
+  "customer": {
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "postalCode": "3700"
+  },
+  "confirmationMessage": "Thank you for your order!"
+}
