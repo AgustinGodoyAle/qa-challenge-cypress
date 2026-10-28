@@ -6,12 +6,11 @@ jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
       - run: npm ci
-      - run: npm test
-        env:
-          CYPRESS_apiUsername: ${{ secrets.API_USERNAME }}
-          CYPRESS_apiPassword: ${{ secrets.API_PASSWORD }}
+      # Solo UI: Fake Store API responde 403 a los runners de GitHub (bloqueo por IP),
+      # así que los tests de API se corren local con npm run test:api.
+      - run: npm run test:ui

@@ -20,7 +20,7 @@ Las credenciales de la API no están en el código. Copiar el archivo de ejemplo
 cp cypress.env.example.json cypress.env.json
 ```
 
-`cypress.env.json` está en el `.gitignore`. También se pueden pasar como variables `CYPRESS_apiUsername` y `CYPRESS_apiPassword` (así lo usa el workflow de GitHub Actions, con secrets).
+`cypress.env.json` está en el `.gitignore`. También se pueden pasar como variables de sistema `CYPRESS_apiUsername` y `CYPRESS_apiPassword`.
 
 Las URLs y el usuario de Sauce Demo están en `cypress.config.js`.
 
@@ -51,3 +51,7 @@ npm run cy:open      # modo interactivo
 - Usé Page Object Model y selectores `data-test`, que son los más estables de la página. Los selectores están todos en `cypress/pages/locators.js` y los page objects los importan, así si cambia uno se toca un solo archivo.
 - Los precios no están hardcodeados: los leo del catálogo y los comparo con los del carrito.
 - `/inventory.html` responde 404 porque la app es una SPA en GitHub Pages que redirige, por eso el visit usa `failOnStatusCode: false`.
+
+**CI**
+
+- El workflow de GitHub Actions corre solo los tests de UI. Fake Store API responde 403 a todos los requests que salen de los runners de GitHub (incluso al login con password incorrecto, que debería dar 401), así que es un bloqueo por IP y no un problema de credenciales. Los tests de API se corren local con `npm run test:api`.
